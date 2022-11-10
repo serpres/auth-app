@@ -12,6 +12,7 @@
 /web/build
 
 # misc
+.DS_Store
 /web/.DS_Store
 /web/.env.local
 /web/.env.development.local
