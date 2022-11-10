@@ -1,0 +1,24 @@
+@mixin container-center() {
+	width: $xl;
+	margin: 0 auto;
+
+	@media screen and (max-width: $xl) {
+		width: $lg;
+	}
+
+	@media screen and (max-width: $lg) {
+		width: $md;
+	}
+
+	@media screen and (max-width: $md) {
+		width: $sm;
+	}
+
+	@media screen and (max-width: $sm) {
+		width: $xs;
+	}
+
+	@media screen and (max-width: $xs) {
+		width: $xxs;
+	}
+}

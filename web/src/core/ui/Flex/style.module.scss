@@ -1,0 +1,77 @@
+$device-xs: 540px;
+$device-sm: 768px;
+$device-md: 992px;
+$device-lg: 1200px;
+
+// TODO: Брэйкпоинты в одно место
+
+.flex-container {
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.flex-row {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@for $i from 1 through 3 {
+	.gap div {
+		margin-right: 10px;
+	}
+}
+
+.flex-row__align-center {
+	align-items: center;
+}
+
+.flex-row__align-end {
+	align-items: flex-end;
+}
+
+.flex-row__justify-center {
+	justify-content: center;
+}
+
+.flex-row__justify-end {
+	justify-content: flex-end;
+}
+
+.flex-row__reverse {
+	flex-direction: row-reverse;
+}
+
+@for $i from 1 through 12 {
+	.flex-col-xs-#{$i},
+	.flex-col-sm-#{$i},
+	.flex-col-md-#{$i},
+	.flex-col-lg-#{$i} {
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	.flex-col-xs-#{$i} {
+		@media (min-width: $device-xs) {
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+
+	.flex-col-sm-#{$i} {
+		@media (min-width: $device-sm) {
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+
+	.flex-col-md-#{$i} {
+		@media (min-width: $device-md) {
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+
+	.flex-col-lg-#{$i} {
+		@media (min-width: $device-lg) {
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+}

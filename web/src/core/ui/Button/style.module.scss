@@ -1,0 +1,28 @@
+@import '../../views/styles';
+
+.button {
+	cursor: pointer;
+	letter-spacing: 1px;
+	font-size: 16px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 10px;
+	color: #fff;
+	transition: 0.3s;
+}
+
+.button-secondary {
+	background-color: var(--secondary-dark);
+	&:focus,
+	&:hover {
+		background-color: var(--secondary-light);
+	}
+}
+
+.button-neutral {
+	background-color: var(--neutral);
+	&:focus,
+	&:hover {
+		background-color: var(--neutral-light);
+	}
+}

@@ -1,0 +1,13 @@
+@import '../../../../core/views/styles/';
+.form {
+	width: 300px;
+	padding: 32px;
+	border-radius: 10px;
+	box-shadow: 0 4px 16pc #ccc;
+	letter-spacing: 1px;
+	&__title {
+		text-align: center;
+		margin-bottom: 32px;
+		font-weight: normal;
+	}
+}

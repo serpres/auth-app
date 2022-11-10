@@ -1,0 +1,7 @@
+@mixin border-radius($p: null) {
+	@if ($p) {
+		border-radius: $p;
+	} @else {
+		border-radius: 0.5rem;
+	}
+}
