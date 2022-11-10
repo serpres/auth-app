@@ -1,0 +1,11 @@
+FROM node:18-alpine As development
+
+EXPOSE 3000
+COPY ["./package.json", "./package-lock.json", "./.env.development", "/app/"]
+WORKDIR /app
+RUN npm i --quiet
+COPY . .
+
+# VOLUME /app/src
+
+CMD npm run start
