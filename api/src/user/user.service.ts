@@ -11,6 +11,7 @@ import { UserResponseInterface } from './types/userResponse.interface';
 
 import { JWT_SECRET_KEY } from '@app/config/config';
 import { LoginUserDto } from './dto/login.dto';
+import { UpdateUserDto } from './dto/updateUser.dto';
 
 @Injectable()
 export class UserService {
@@ -90,5 +91,19 @@ export class UserService {
         token: this.generateJwt(user),
       },
     };
+  }
+
+  findById(id: number): Promise<UserEntity> {
+    return this.userRepository.findOneBy({ id });
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    const user = await this.findById(userId);
+    Object.assign(user, updateUserDto);
+    console.log('USER!!!!', updateUserDto);
+    return await this.userRepository.save(user);
   }
 }
