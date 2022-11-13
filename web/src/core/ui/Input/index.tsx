@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
+import { RefCallBack } from 'react-hook-form';
 
 import s from './style.module.scss';
 
 type TProps = {
 	error?: string;
 	title?: string;
+	innerRef?: RefCallBack;
 };
 
 const Input: FC<
@@ -13,9 +15,14 @@ const Input: FC<
 			React.InputHTMLAttributes<HTMLInputElement>,
 			HTMLInputElement
 		>
-> = ({ children, className, title, error, ...rest }) => (
+> = ({ children, className, title, error, innerRef, ...rest }) => (
 	<div className={s.container}>
-		<input placeholder=" " className={s.input + ' ' + className} {...rest} />
+		<input
+			ref={innerRef}
+			placeholder=" "
+			className={s.input + ' ' + className}
+			{...rest}
+		/>
 		<label className={s.label}>{title}</label>
 	</div>
 );
