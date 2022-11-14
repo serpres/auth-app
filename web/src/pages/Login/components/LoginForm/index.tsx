@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useLoginUserMutation } from '../../../../core/api/UsersApi';
-import { TOKEN_LS_KEY } from '../../../../core/constants/tokenLSKey';
+import { toast } from 'react-toastify';
 
 import Button from '../../../../core/ui/Button';
 import Input from '../../../../core/ui/Input';
 import Typography from '../../../../core/ui/Typography';
 
+import { useAuth } from '../../../../core/hooks/useAuth';
+
+import { UNPROCESSABLE_ENTITY } from '../../../../core/constants/httpErrors';
+
 import s from './style.module.scss';
 
 const LoginForm = () => {
+	const { login, error: loginError } = useAuth();
 	const {
 		formState: { errors },
 		control,
+		handleSubmit,
 	} = useForm();
 
+	const onSubmit = handleSubmit((values) => {
+		login(values.email, values.password);
+	});
+
+	useEffect(() => {
+		if (loginError === UNPROCESSABLE_ENTITY)
+			toast.error('Неверный email или пароль');
+	}, [loginError]);
+
 	return (
-		<form className={s.form} onSubmit={() => {}}>
+		<form className={s.form} onSubmit={onSubmit}>
 			<Typography.Title className={s.form__title} level={2}>
 				Вход
 			</Typography.Title>
@@ -35,16 +49,22 @@ const LoginForm = () => {
 				name="password"
 				control={control}
 				render={({ field }) => (
-					<Input title="Пароль" {...field} ref={null} innerRef={field.ref} />
+					<Input
+						title="Пароль"
+						{...field}
+						ref={null}
+						innerRef={field.ref}
+						type="password"
+					/>
 				)}
 			/>
 
 			<Button type="submit" buttonType="secondary">
 				Войти
 			</Button>
-			<div style={{ color: 'red' }}>
-				{(errors.email || errors.password) && 'Заполните все поля'}
-			</div>
+			{(errors.email || errors.password) && (
+				<div style={{ color: 'red' }}>Заполните все поля</div>
+			)}
 		</form>
 	);
 };

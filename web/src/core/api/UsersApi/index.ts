@@ -13,7 +13,7 @@ export const usersApi = createApi({
 	}),
 	endpoints: (build) => ({
 		loginUser: build.mutation<IUser, ILoginUserRequest>({
-			query: (body) => ({
+			query: ({ body }) => ({
 				url: `/users/login`,
 				method: 'POST',
 				body,
