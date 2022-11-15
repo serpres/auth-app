@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { authorizationHeaders } from '../helpers';
+
+import { IUser } from '../../../types/IUser.interface';
 import { ILoginUserRequest } from './types/ILoginUserRequest.interface';
-import { IUser } from './types/IUser.interface';
+import { IRegisterUserRequest } from './types/IRegisterUserRequest.interface';
 
 export const usersApi = createApi({
 	reducerPath: 'usersApi',
@@ -12,9 +14,16 @@ export const usersApi = createApi({
 		mode: 'cors',
 	}),
 	endpoints: (build) => ({
-		loginUser: build.mutation<IUser, ILoginUserRequest>({
+		loginUser: build.mutation<{ user: IUser }, ILoginUserRequest>({
 			query: ({ body }) => ({
 				url: `/users/login`,
+				method: 'POST',
+				body,
+			}),
+		}),
+		registerUser: build.mutation<{ user: IUser }, IRegisterUserRequest>({
+			query: ({ body }) => ({
+				url: `/users`,
 				method: 'POST',
 				body,
 			}),
@@ -22,4 +31,4 @@ export const usersApi = createApi({
 	}),
 });
 
-export const { useLoginUserMutation } = usersApi;
+export const { useLoginUserMutation, useRegisterUserMutation } = usersApi;
